@@ -1,0 +1,45 @@
+---
+interface Props {
+  icon: string;
+  shortText: string;
+  longText: string;
+}
+
+const { icon, shortText, longText } = Astro.props;
+---
+
+<astro-info-button
+  data-icon={icon}
+  class="prevToAnimation w-80 rounded-lg bg-white shadow-lg shadow-gray-400 hover:scale-105 hover:shadow-xl hover:shadow-gray-600 sm:w-auto"
+>
+  <button class="grid grid-rows-3">
+    <div
+      class="row-span-1 mb-2 flex h-full items-center justify-center gap-5 px-6 py-4 text-xl font-bold"
+    >
+      <i class=`fa-solid ${icon}`></i>
+      <p class="text-left">{shortText}</p>
+    </div>
+    <p
+      class="row-span-3 row-start-2 px-6 pb-4 text-left text-base text-gray-700"
+    >
+      {longText}
+    </p>
+  </button>
+</astro-info-button>
+
+<script>
+  class AstroInfoButton extends HTMLElement {
+    constructor() {
+      super();
+
+      // Lee el mensaje del atributo data.
+      const icon = this.dataset.icon;
+      const button = this.querySelector("button");
+      button?.addEventListener("click", () => {
+        alert(icon);
+      });
+    }
+  }
+
+  customElements.define("astro-info-button", AstroInfoButton);
+</script>
